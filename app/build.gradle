@@ -1,0 +1,39 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion '26.0.2'
+
+    defaultConfig {
+        applicationId "github.ethesx.librarycodereader"
+        minSdkVersion minSdkVer
+        targetSdkVersion targetSdkVer
+        versionCode 1
+        versionName "1.0"
+          testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+    
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    // Testing-only dependencies
+    testImplementation "junit:junit:$junitVer"
+    androidTestImplementation "com.android.support.test:runner:$androidTestRunnerVer"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoCoreVer"
+    implementation "com.android.support:appcompat-v7:$supportLibVer"
+    implementation "com.android.support:design:$supportLibVer"
+    implementation "com.google.android.gms:play-services-vision:$googlePlayServicesVer"
+    compile 'com.android.volley:volley:1.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+}
