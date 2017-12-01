@@ -110,17 +110,16 @@ public class MobileVisionHelper {
                         public void run() {
                             ImageView barcodeImage = (ImageView)activity.findViewById(R.id.imageView);
                             SurfaceView surfaceView = (SurfaceView)activity.findViewById(R.id.camera_view);
-                            ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.progressSpinner);
-                            pBar.setVisibility(View.VISIBLE);
 
                             barcodeImage.setImageDrawable(jpeg);
                             barcodeImage.setVisibility(View.VISIBLE);
-                            //progressSpinner
                             surfaceView.setVisibility(View.INVISIBLE);
                         }
                     });
                 }
             });
+            ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.progressSpinner);
+            pBar.setVisibility(View.VISIBLE);
             cameraSource.stop();
         }
 

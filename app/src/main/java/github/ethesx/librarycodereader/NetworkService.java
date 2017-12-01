@@ -1,6 +1,8 @@
 package github.ethesx.librarycodereader;
 
 import android.app.Activity;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -31,7 +33,8 @@ public class NetworkService {
                 url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.progressSpinner);
+                pBar.setVisibility(View.GONE);
                 resultTextView.setText("Response is: "
                         + response);
 
