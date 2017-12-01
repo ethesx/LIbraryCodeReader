@@ -1,8 +1,10 @@
 package github.ethesx.librarycodereader;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.util.SparseArray;
@@ -10,7 +12,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ImageView;
-import android.graphics.drawable.Drawable;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
@@ -87,7 +89,7 @@ public class MobileVisionHelper {
 
     }
 
-    public static void stopCameraView(final ImageView barcodeImage, final SurfaceView surfaceView){
+    public static void stopCameraView(Activity activity) {//final ImageView barcodeImage, final SurfaceView surfaceView){
         //cameraSource.takePicture();
         if (cameraSource != null){
             cameraSource.takePicture(new CameraSource.ShutterCallback() {
@@ -103,11 +105,17 @@ public class MobileVisionHelper {
                 public void onPictureTaken(final byte[] bytes) {
                     final Drawable jpeg = Drawable.createFromStream(new ByteArrayInputStream(bytes), null);
 
-                    barcodeImage.post(new Runnable() {
+                    activity.findViewById(R.id.code_info).post(new Runnable() {
                         @Override
                         public void run() {
+                            ImageView barcodeImage = (ImageView)activity.findViewById(R.id.imageView);
+                            SurfaceView surfaceView = (SurfaceView)activity.findViewById(R.id.camera_view);
+                            ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.progressSpinner);
+                            pBar.setVisibility(View.VISIBLE);
+
                             barcodeImage.setImageDrawable(jpeg);
                             barcodeImage.setVisibility(View.VISIBLE);
+                            //progressSpinner
                             surfaceView.setVisibility(View.INVISIBLE);
                         }
                     });

@@ -1,6 +1,6 @@
 package github.ethesx.librarycodereader;
 
-import android.content.Context;
+import android.app.Activity;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -18,9 +18,10 @@ import java.io.IOException;
 
 public class NetworkService {
 
-    public static void lookupISBN (String isbn, Context context, final TextView resultTextView) throws IOException {
+    public static void lookupISBN (String isbn, Activity activity) throws IOException{//Context context, final TextView resultTextView) throws IOException {
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(context);
+        RequestQueue queue = Volley.newRequestQueue(activity.getApplicationContext());
+        TextView resultTextView = activity.findViewById(R.id.code_info);
 
         //TODO finish appending isbn for search
         String url = "https://my-json-server.typicode.com/ethesx/testjson/books";
@@ -30,6 +31,7 @@ public class NetworkService {
                 url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
                 resultTextView.setText("Response is: "
                         + response);
 

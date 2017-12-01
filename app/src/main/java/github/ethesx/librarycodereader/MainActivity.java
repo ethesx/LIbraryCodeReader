@@ -32,10 +32,13 @@ public class MainActivity extends AppCompatActivity {
                 barcodeInfo.post(new Runnable() {
                     @Override
                     public void run() {
-                        barcodeInfo.setText(data);
-                        MobileVisionHelper.stopCameraView(barcodeImage, cameraView);
+                        //Update the display to show code being looked up
+                        barcodeInfo.setText(R.string.check_display + data);
+                        MobileVisionHelper.stopCameraView(MainActivity.this);//(barcodeImage, cameraView);
+
+                        //Perform the actual lookup and populate the display
                         try {
-                            NetworkService.lookupISBN(data, getApplicationContext(), barcodeInfo);
+                            NetworkService.lookupISBN(data, MainActivity.this);//getApplicationContext(), barcodeInfo);
                         } catch(IOException e) {
                             barcodeInfo.setText(e.toString());
                         }
