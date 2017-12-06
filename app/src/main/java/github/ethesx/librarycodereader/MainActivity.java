@@ -1,13 +1,12 @@
 package github.ethesx.librarycodereader;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.SurfaceView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,14 +33,8 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         //Update the display to show code being looked up
                         barcodeInfo.setText(R.string.check_display + data);
-                        MobileVisionHelper.stopCameraView(MainActivity.this);//(barcodeImage, cameraView);
-
-                        //Perform the actual lookup and populate the display
-                        try {
-                            NetworkService.lookupISBN(data, MainActivity.this);//getApplicationContext(), barcodeInfo);
-                        } catch(IOException e) {
-                            barcodeInfo.setText(e.toString());
-                        }
+                        MobileVisionHelper.stopCameraView(MainActivity.this);
+                        startActivity(createResultsIntent(data));
                     }
                 });
 
@@ -49,18 +42,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
-    /*@Override
-    protected void onPause() {
-        super.onPause();
-        MobileVisionHelper.releaseCameraView();
+    private Intent createResultsIntent(String data){
+        Intent intent = new Intent(MainActivity.this, ViewResultsActivity.class);
+        intent.putExtra("isbn", data);
+        return intent;
     }
-
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        MobileVisionHelper.releaseCameraView();
-    }*/
 }
 

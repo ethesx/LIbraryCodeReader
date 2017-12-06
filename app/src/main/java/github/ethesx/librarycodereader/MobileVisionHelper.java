@@ -12,7 +12,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
@@ -89,8 +88,8 @@ public class MobileVisionHelper {
 
     }
 
-    public static void stopCameraView(Activity activity) {//final ImageView barcodeImage, final SurfaceView surfaceView){
-        //cameraSource.takePicture();
+    public static void stopCameraView(Activity activity) {
+
         if (cameraSource != null){
             cameraSource.takePicture(new CameraSource.ShutterCallback() {
                 @Override
@@ -118,8 +117,7 @@ public class MobileVisionHelper {
                     });
                 }
             });
-            ProgressBar pBar = (ProgressBar)activity.findViewById(R.id.progressSpinner);
-            pBar.setVisibility(View.VISIBLE);
+
             cameraSource.stop();
         }
 
