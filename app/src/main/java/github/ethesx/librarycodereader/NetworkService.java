@@ -20,6 +20,8 @@ import java.io.IOException;
 
 public class NetworkService {
 
+    public static final String URI = "https://my-json-server.typicode.com/ethesx/testjson/bookreport/";
+
     public static void lookupISBN (String isbn, Context context, final ResultsCallbacks resultsCallbacks) throws IOException {
 
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.INTERNET)
@@ -28,11 +30,10 @@ public class NetworkService {
             RequestQueue queue = Volley.newRequestQueue(context);
 
             //TODO finish appending isbn for search
-            String url = "https://my-json-server.typicode.com/ethesx/testjson/bookreport";
-
             // Request a string response from the provided URL.
+            final String URL = URI + isbn;
             StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                    url, new Response.Listener<String>() {
+                    URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     resultsCallbacks.onResponseCallback(response);

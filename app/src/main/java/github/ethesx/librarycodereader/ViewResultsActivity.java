@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -78,7 +77,7 @@ public class ViewResultsActivity extends AppCompatActivity {
 
 
         try {
-             return new JSONArray(data).getJSONObject(0);
+             return new JSONObject(data);
         }
         catch(Exception e){
             System.out.println("Unable to parse JSON response");
